@@ -1,4 +1,4 @@
-#!/bash
+#!/bin/bash
 
 # test if user have sudo permission
 if sudo -v >/dev/null 2>&1; then
