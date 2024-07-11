@@ -8,6 +8,9 @@ case $- in
 	*) return;;
 esac
 
+# disable history
+set +o history
+
 [[ $- == *i* ]] && source "$XDG_DATA_HOME"/blesh/ble.sh --noattach
 
 
