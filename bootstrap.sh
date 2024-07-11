@@ -16,10 +16,13 @@ fi
 os=$(uname -s | tr '[:upper:]' '[:lower:]')
 brew bundle install --file="${PWD}/brew/${os}.brew"
 
-# shell specific tasks
-# if current shell is bash, install ble.sh
-if [ -n "$BASH_VERSION" ]; then
+if [ "$os" == "darwin" ]; then
+    ln -s "${PWD}/shell/.zshrc" "${HOME}/.zshrc"
+elif [ "$os" == "linux" ]; then
+    ln -s "${PWD}/shell/.bashrc" "${HOME}/.bashrc"
     echo "Install ble.sh"
     git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git
     make -C ble.sh install PREFIX=~/.local
 fi
+
+ln -s "${PWD}/config" "${HOME}/.config"
