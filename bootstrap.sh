@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# test if user have sudo permission
+# install homebrew
 if sudo -v >/dev/null 2>&1; then
     echo "Install homebrew globally"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -12,3 +12,7 @@ else
     brew update --force --quiet
     chmod -R go-w "$("$homebrew_prefix"/share/zsh)"
 fi
+
+# install packages from Brewfile
+os=$(uname -s | tr '[:upper:]' '[:lower:]')
+brew bundle install --file="${PWD}/brew/${os}.brew"
