@@ -9,4 +9,6 @@ else
     homebrew_prefix="$HOME"/.homebrew
     mkdir "$homebrew_prefix" && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C "$homebrew_prefix"
     eval "$("$homebrew_prefix"/bin/brew shellenv)"
+    brew update --force --quiet
+    chmod -R go-w "$("$homebrew_prefix"/share/zsh)"
 fi
