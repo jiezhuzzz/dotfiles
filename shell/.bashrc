@@ -15,8 +15,8 @@ esac
 set +o history
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(starship init bash)"
 eval "$(atuin init bash)"
+eval "$(starship init bash)"
 
 alias vim="nvim"
 alias vi="nvim"
