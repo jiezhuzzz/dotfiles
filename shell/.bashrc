@@ -3,7 +3,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
-
+export PYENV_ROOT="$HOME/.pyenv"
 # Export homebrew environment
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -50,6 +50,20 @@ pbpaste() {
   fi
 }
 
-[ -s "/home/linuxbrew/.linuxbrew/opt/jabba/share/jabba/jabba.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/jabba/share/jabba/jabba.sh"
+function yy() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 [[ ${BLE_VERSION-} ]] && ble-attach
