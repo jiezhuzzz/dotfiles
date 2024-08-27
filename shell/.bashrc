@@ -1,8 +1,23 @@
-# XDG environment
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
+hostname=$(hostname)
+if [ "$hostname" == "goku" ] || [ "$hostname" == "vegeta" ]; then
+    server_home="/zp_${hostname}/scratch_sb/jiez"
+    bin_extra="/zp_${hostname}/scratch_lb/jiez/3rd"
+    export XDG_CACHE_HOME="$server_home/.cache"
+    export XDG_DATA_HOME="$server_home/.local/share"
+    export XDG_STATE_HOME="$server_home/.local/state"
+else
+    export XDG_CACHE_HOME="$HOME/.cache"
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export XDG_STATE_HOME="$HOME/.local/state"
+fi
+
+if [ -n "$bin_extra" ]; then
+  export PATH="$PATH:${bin_extra}/starship"
+else
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 
 # xdg-ninja
 export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
@@ -22,9 +37,6 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export SONARLINT_USER_HOME="$XDG_DATA_HOME/sonarlint"
 export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
-
-# Export homebrew environment
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Enable ble.sh
 [[ $- == *i* ]] && source "$XDG_DATA_HOME"/blesh/ble.sh --noattach
