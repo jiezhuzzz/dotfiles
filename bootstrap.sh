@@ -1,4 +1,36 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+### shell options
+set -e
+set -u
+set -o pipefail
+(shopt -p inherit_errexit &>/dev/null) && shopt -s inherit_errexit
+
+### set up lobash
+source scripts/utils.sh
+enable_lobash
+
+### config your git
+#set_up_git
+
+### Bootstrap system
+os=$(l.detect_os)
+
+status "Bootstraping $os now ..."
+
+if [ "$os" == "MacOS" ]; then
+    hostname=$(scutil --get LocalHostName)
+    source scripts/mac.sh
+    install_xcode_command_line_tools
+    install_nix
+else
+    hostname=$(l.hostname)
+    status "Unsupported OS: $os"
+    exit 1
+fi
+
+
+exit 0
 
 # install homebrew
 if sudo -v >/dev/null 2>&1; then
