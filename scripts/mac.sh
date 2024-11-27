@@ -25,3 +25,10 @@ function install_nix_home_manager() {
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
     nix-channel --update
 }
+
+
+# execute functions in order
+install_xcode_command_line_tools
+install_nix
+install_nix_darwin
+install_nix_home_manager
