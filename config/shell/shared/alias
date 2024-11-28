@@ -1,0 +1,7 @@
+alias_if_cmd vim nvim
+alias_if_cmd vi nvim
+alias_if_cmd grep rg
+alias_if_cmd ls eza
+alias_if_cmd mvn "mvn -gs $XDG_CONFIG_HOME/maven/settings.xml"
+alias_if_cmd wget "wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+alias_if_cmd svn "svn --config-dir $XDG_CONFIG_HOME/subversion"

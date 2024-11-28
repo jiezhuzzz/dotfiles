@@ -40,3 +40,13 @@ function set_shell() {
         sudo chsh -s "$selected_shell"
     done
 }
+
+function set_config() {
+    local config_dir
+    config_dir=${XDG_CONFIG_HOME:-"$HOME/.config"}
+    echo "config_dir: $config_dir"
+    if [[ -d "$config_dir" ]]; then
+        mv -f "$config_dir" "$config_dir".old
+    fi
+    ln -s "$DOTFILES_DIR"/config "$config_dir"
+}

@@ -3,7 +3,13 @@
 ### setup environment variables
 export -U PATH path FPATH fpath MANPATH manpath
 export -UT INFOPATH infopath
-source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shared/env"
+
+for file in "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shared/"*; do
+    source "$file"
+done
+
+export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh"
+
 
 ### zsh options
 
@@ -11,3 +17,5 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shared/env"
 ### commands & aliases
 setopt AUTO_CD
 
+eval_if_cmd atuin "init zsh"
+eval_if_cmd starship "init zsh"

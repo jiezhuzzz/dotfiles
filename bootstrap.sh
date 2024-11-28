@@ -15,6 +15,8 @@ for script in "$SCRIPTS_DIR"/*.sh; do
     source "$script"
 done
 
+set_config
+
 ### bootstrap system
 
 # interactive setup
@@ -42,13 +44,11 @@ case $SHELL in
     install_blesh
     ;;
 */zsh*)
-    install_zsh
+    echo "TODO: install some neccessary zsh plugins"
     ;;
 *)
-    error "Unsupported shell: $SHELL"
+    warn "$SHELL is currently not supported."
     ;;
 esac
-
-# setup symlinks
 
 exit 0

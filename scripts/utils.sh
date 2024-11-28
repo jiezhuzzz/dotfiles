@@ -88,7 +88,7 @@ function choose() {
 
 # check functions
 function has_cmd() {
-    [[ $(which "$1") ]]
+    [[ $(command -v "$1" &>/dev/null) ]]
 }
 
 function array_has_value() {
