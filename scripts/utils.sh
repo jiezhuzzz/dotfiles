@@ -114,6 +114,12 @@ function system_name() {
     fi
 }
 
+function prepare_dir() {
+    if [[ ! -d "$1" ]]; then
+        mkdir -p "$1"
+    fi
+}
+
 ### internal functions
 
 function _choose_prompt() {
