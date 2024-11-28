@@ -40,7 +40,7 @@ function install_blesh() {
     fi
     local ble_sh_dir="/tmp/ble.sh"
     git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git "$ble_sh_dir"
-    make -C $ble_sh_dir install PREFIX=$HOME/.local
+    make -C $ble_sh_dir install PREFIX="$HOME"/.local
 }
 
 function install_pkgs() {
