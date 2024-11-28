@@ -21,7 +21,6 @@ done
 status "Bootstraping system now ..."
 set_git
 
-
 if has_sudo; then
     set_shell
 fi
@@ -37,8 +36,19 @@ fi
 
 install_pkgs
 
+# link config files
+case $SHELL in
+*/bash*)
+    install_blesh
+    ;;
+*/zsh*)
+    install_zsh
+    ;;
+*)
+    error "Unsupported shell: $SHELL"
+    ;;
+esac
 
 # setup symlinks
-ln -s "${PWD}/config" "${HOME}/.config"
 
 exit 0
