@@ -6,34 +6,39 @@ set -u
 set -o pipefail
 (shopt -p inherit_errexit &>/dev/null) && shopt -s inherit_errexit
 
-### set up lobash
-source scripts/utils.sh
-enable_lobash
+# constants
+DOTFILES_DIR=$PWD
+SCRIPTS_DIR="$DOTFILES_DIR"/scripts
 
-### config your git
-#set_up_git
+### load functions
+for script in "$SCRIPTS_DIR"/*.sh; do
+    source "$script"
+done
 
-### Bootstrap system
-os=$(l.detect_os)
+### bootstrap system
 
-status "Bootstraping $os now ..."
+# interactive setup
+status "Bootstraping system now ..."
+set_git
 
-if [ "$os" == "MacOS" ]; then
-    set_default_shell
-    hostname=$(scutil --get LocalHostName)
-    source scripts/mac.sh
-else # Linux
-    # test if you have sudo access
-    l.if $(sudo -n true 2>/dev/null) 
-    if sudo -n true 2>/dev/null; then
-        source scripts/linux.sh
-    else
-        info "You do not have sudo access. Please run this script with sudo."
-    fi
+
+if has_sudo; then
+    set_shell
 fi
 
+# install dependencies
+if [ "$(os)" == "darwin" ]; then
+    install_xcode_command_line_tools
+fi
 
+if has_sudo; then
+    install_nix
+fi
+
+install_pkgs
+
+
+# setup symlinks
+ln -s "${PWD}/config" "${HOME}/.config"
 
 exit 0
-
-ln -s "${PWD}/config" "${HOME}/.config"
