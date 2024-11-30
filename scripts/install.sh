@@ -24,7 +24,7 @@ function install_rio_terminfo() {
 }
 
 function install_nix() {
-    if ! has_cmd "nix-channel"; then
+    if has_cmd "nix"; then
         if [[ $(os) == "darwin" ]]; then
             _install_nix_mac
         else
@@ -36,16 +36,16 @@ function install_nix() {
 
 function install_blesh() {
     if has_cmd "ble-update"; then
-        return
+        info "Installing ble.sh..."
+        local ble_sh_dir="/tmp/ble.sh"
+        git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git "$ble_sh_dir"
+        make -C "$ble_sh_dir" install PREFIX="$HOME"/.local
     fi
-    local ble_sh_dir="/tmp/ble.sh"
-    git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git "$ble_sh_dir"
-    make -C $ble_sh_dir install PREFIX="$HOME"/.local
+    status "ble.sh is installed."
 }
 
 function install_pkgs() {
-
-    if has_cmd nix; then
+    if has_cmd "nix"; then
         info "Installing packages with Nix..."
         # TODO: install packages
     else
@@ -81,7 +81,7 @@ function _install_pkgs_nosudo() {
             continue
         fi
         _install_pkg "$cmd" "$pkg_name" "$url"
-    done < "$DOTFILES_DIR"/pkgs.list
+    done <"$DOTFILES_DIR"/pkgs.list
 }
 
 function _prepare_install_dir() {

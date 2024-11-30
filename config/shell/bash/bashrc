@@ -1,13 +1,9 @@
-#!/usr/bin/env bash
-
 # Enable ble.sh
-[[ $- == *i* ]] && source "$XDG_DATA_HOME"/blesh/ble.sh --noattach --rcfile "$XDG_CONFIG_HOME"/blesh/ble.rc
+[[ $- == *i* ]] && source "$XDG_DATA_HOME"/blesh/ble.sh --noattach --rcfile "$XDG_CONFIG_HOME"/blerc
 
-source "$XDG_CONFIG_HOME"/shell/env
+source "$XDG_CONFIG_HOME"/shell/shared/env
 
 export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/bash"
-
-
 
 eval_if_cmd atuin "init bash"
 eval_if_cmd starship "init bash"

@@ -42,19 +42,19 @@ function ask_input() {
 
 function yes_or_no() {
     local prompt=$1 default answer
-    
+
     default=$(_yes_or_no_default "${2:-N}")
-    
+
     while true; do
         read -rp "$prompt (Default: $default) " answer
         answer=${answer:-$default}
-        
+
         answer=${answer,,}
-        if [[ $answer == "yes" ]] || [[ $answer == "y" ]]; then
-            printf '%s\n' "Yes"
+        if [[ $answer == "yes" || $answer == "y" ]]; then
+            printf '%s\n' "Y"
             break
-        elif [[ $answer == "no" ]] || [[ $answer == "n" ]]; then
-            printf '%s\n' "No"
+        elif [[ $answer == "no" || $answer == "n" ]]; then
+            printf '%s\n' "N"
             break
         else
             warn "Invalid answer: $answer, please answer 'yes' or 'no'"
@@ -87,6 +87,7 @@ function choose() {
 }
 
 # check functions
+
 function has_cmd() {
     [[ $(command -v "$1" &>/dev/null) ]]
 }
@@ -102,6 +103,7 @@ function has_sudo() {
     sudo -n true 2>/dev/null
 }
 
+# system functions
 function os() {
     uname | tr '[:upper:]' '[:lower:]'
 }
@@ -120,6 +122,18 @@ function prepare_dir() {
     fi
 }
 
+function prepare_symlink() {
+    if [[ ! -e "$1" ]]; then
+        error "Source file $1 does not exist."
+    fi
+    if [[ -L "$2" ]]; then
+        rm -f "$2"
+    elif [[ -e "$2" ]]; then
+        mv -f "$2" "$2".old
+    fi
+    ln -s "$1" "$2"
+}
+
 ### internal functions
 
 function _choose_prompt() {
@@ -134,7 +148,7 @@ function _choose_prompt() {
 
 function _yes_or_no_default() {
     local default
-    
+
     if [[ $1 == "Y" ]]; then
         default="Yes"
     elif [[ $1 == "N" ]]; then
