@@ -51,7 +51,7 @@ function install_nix_flakes() {
 }
 
 function install_blesh() {
-    if has_cmd "ble-update"; then
+    if ! has_cmd "ble-update"; then
         info "Installing ble.sh..."
         local ble_sh_dir="/tmp/ble.sh"
         git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git "$ble_sh_dir"

@@ -18,6 +18,9 @@ if [ "$(os)" == "macos" ]; then
     install_xcode_command_line_tools
 fi
 
+install_rio_terminfo
+install_ble
+
 if has_sudo; then
     set_default_shell
     install_nix
