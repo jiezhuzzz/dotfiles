@@ -12,7 +12,7 @@ function set_git() {
         return
     fi
     # Ask for git username and email
-    local username email confirm
+    local GIT_USER GIT_EMAIL confirm
     while true; do
         # ask for git username and email
         username=$(ask_input "What's your git username?")
@@ -27,6 +27,8 @@ function set_git() {
             warn "Please try again."
         fi
     done
+    mkdir -p "$DOTFILES_DIR"/git
+    mo "$DOTFILES_DIR"/templates/git/config > "$DOTFILES_DIR"/git/config
 }
 
 function set_default_shell() {

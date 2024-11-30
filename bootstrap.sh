@@ -33,4 +33,5 @@ fi
 if has_sudo; then
     set_default_shell
     install_nix
+    install_nix_flakes
 fi

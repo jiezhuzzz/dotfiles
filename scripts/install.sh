@@ -34,6 +34,13 @@ function install_nix() {
     status "Nix is installed."
 }
 
+function install_nix_flakes() {
+    mkdir -p "$DOTFILES_DIR"/nix
+    for nix_file in "$DOTFILES_DIR"/nix-templates/"$(os)"/*; do
+        mo "$nix_file" > "$DOTFILES_DIR"/nix/"$(basename "$nix_file")"
+    done
+}
+
 function install_blesh() {
     if has_cmd "ble-update"; then
         info "Installing ble.sh..."
