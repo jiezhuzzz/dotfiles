@@ -35,9 +35,18 @@ function install_nix() {
 }
 
 function install_nix_flakes() {
-    mkdir -p "$DOTFILES_DIR"/nix
-    for nix_file in "$DOTFILES_DIR"/nix-templates/"$(os)"/*; do
-        mo "$nix_file" > "$DOTFILES_DIR"/nix/"$(basename "$nix_file")"
+    local nix_dir="$DOTFILES_DIR"/nix
+    local nix_template_dir="$DOTFILES_DIR"/templates/nix/"$(os)"
+    local nix_files
+
+    prepare_dir "$nix_dir"
+
+    nix_files=$(find -L "$nix_template_dir" -type f -name "*.nix")
+    for file in $nix_files; do
+        relative_path=$(relative_path "$nix_template_dir" "$file")
+        local output_file="$nix_dir"/"$relative_path"
+        prepare_dir "$(dirname "$output_file")"
+        mo "$file" > "$output_file"
     done
 }
 

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   username = "{{USER}}";
-  homeDirectory = "/home/{{USER}}";
+  homeDirectory = "{{HOME}}";
 in {
   home.username = username;
   home.homeDirectory = homeDirectory;
