@@ -1,5 +1,5 @@
 {
-  description = "MacOS system flake";
+  description = "MacOS Nix Config";
 
   inputs = {
     # nixpkgs

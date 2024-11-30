@@ -47,6 +47,8 @@ function install_blesh() {
 function install_pkgs() {
     if has_cmd "nix"; then
         info "Installing packages with Nix..."
+        nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+        nix-channel --update
         # TODO: install packages
     else
         info "Nix is not installed. Installing packages without sudo..."
