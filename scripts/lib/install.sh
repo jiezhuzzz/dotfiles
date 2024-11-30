@@ -24,7 +24,7 @@ function install_rio_terminfo() {
 }
 
 function install_nix() {
-    if has_cmd "nix"; then
+    if ! has_cmd "nix"; then
         if [[ $(os) == "darwin" ]]; then
             _install_nix_mac
         else
