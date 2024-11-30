@@ -105,7 +105,15 @@ function has_sudo() {
 
 # system functions
 function os() {
-    uname | tr '[:upper:]' '[:lower:]'
+    # if darwin, return macos
+    local name=$(uname)
+    if [[ $name == "Darwin" ]]; then
+        printf 'macos\n'
+    elif [[ $name == "Linux" ]]; then
+        printf 'linux\n'
+    else
+        error "Unsupported OS: $name"
+    fi
 }
 
 function system_name() {

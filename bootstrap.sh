@@ -11,6 +11,9 @@ DOTFILES_DIR=$PWD
 SCRIPTS_DIR="$DOTFILES_DIR"/scripts
 
 ### load functions
+if [[ ! -f "$SCRIPTS_DIR"/mo.sh ]]; then
+    curl -sSL https://raw.githubusercontent.com/tests-always-included/mo/master/mo -o "$SCRIPTS_DIR"/mo.sh
+fi
 for script in "$SCRIPTS_DIR"/*.sh; do
     source "$script"
 done
@@ -23,7 +26,7 @@ status "Bootstraping system now ..."
 set_git
 
 # install dependencies
-if [ "$(os)" == "darwin" ]; then
+if [ "$(os)" == "macos" ]; then
     install_xcode_command_line_tools
 fi
 

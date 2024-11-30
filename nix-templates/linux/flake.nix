@@ -13,17 +13,14 @@
     home-manager,
     ...
   }: let
-    # system = "aarch64-linux"; If you are running on ARM powered computer
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    homeConfigurations = {
-      cc = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."{{USER}}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./home-manager/home.nix
         ];
-      };
     };
   };
 }
