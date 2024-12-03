@@ -25,7 +25,7 @@ function install_rio_terminfo() {
 
 function install_nix() {
     if ! has_cmd "nix"; then
-        if [[ $(os) == "darwin" ]]; then
+        if [[ $(os) == "macos" ]]; then
             _install_nix_mac
         else
             _install_nix_linux
@@ -53,9 +53,12 @@ function install_nix_flakes() {
 function install_blesh() {
     if ! has_cmd "ble-update"; then
         info "Installing ble.sh..."
-        local ble_sh_dir="/tmp/ble.sh"
-        git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git "$ble_sh_dir"
-        make -C "$ble_sh_dir" install PREFIX="$HOME"/.local
+        local ble_version="0.4.0-devel3"
+        local ble_install_dir="$HOME/.local/share/blesh"
+        curl -LO https://github.com/akinomyoga/ble.sh/releases/download/"$ble_version"/ble-"$ble_version".tar.xz
+        tar -xvf ble-"$ble_version".tar.xz
+        cp -r ble-"$ble_version" "$ble_install_dir"
+        rm -rf ble-"$ble_version"
     fi
     status "ble.sh is installed."
 }

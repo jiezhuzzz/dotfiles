@@ -19,7 +19,7 @@ if [ "$(os)" == "macos" ]; then
 fi
 
 install_rio_terminfo
-install_blesh
+# install_blesh
 
 if has_sudo; then
     set_default_shell

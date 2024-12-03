@@ -89,18 +89,23 @@ function choose() {
 # check functions
 
 function has_cmd() {
-    [[ $(command -v "$1" &>/dev/null) ]]
+    command -v "$1" &>/dev/null
 }
 
 function array_has_value() {
+    if (( $# < 2 )); then
+        error "array_has_value: requires at least 2 arguments (value and array elements)"
+    fi
+    
+    local needle=$1
     for item in "${@:2}"; do
-        [[ $item == "$1" ]] && return 0
+        [[ $item == "$needle" ]] && return 0
     done
     return 1
 }
 
 function has_sudo() {
-    sudo -n true 2>/dev/null
+    sudo -l &>/dev/null
 }
 
 # system functions

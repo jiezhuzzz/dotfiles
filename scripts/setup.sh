@@ -7,5 +7,4 @@ set -u
 set -o pipefail
 (shopt -p inherit_errexit &>/dev/null) && shopt -s inherit_errexit
 
-install_blesh
 install_pkgs
