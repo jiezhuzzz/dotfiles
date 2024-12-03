@@ -122,10 +122,10 @@ function os() {
 }
 
 function system_name() {
-    if [[ $(os) == "darwin" ]]; then
-        scutil --get LocalHostName
+    if [[ $(os) == "macos" ]]; then
+        printf '%s' "$(scutil --get LocalHostName | tr -d '\n')"
     else
-        hostname
+        printf '%s' "$(hostname | tr -d '\n')"
     fi
 }
 

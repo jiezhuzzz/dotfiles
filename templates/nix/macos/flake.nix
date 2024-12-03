@@ -42,10 +42,9 @@
   }: {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."{{system_name}}" = nix-darwin.lib.darwinSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./darwin.nix
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
