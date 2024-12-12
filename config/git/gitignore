@@ -1,0 +1,13 @@
+# Apple
+.DS_Store
+
+# Microsoft
+.vscode
+Thumbs.db
+
+# JetBrains
+.idea
+
+# General
+.env
+*.log
