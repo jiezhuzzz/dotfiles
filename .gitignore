@@ -1,3 +1,14 @@
 /nix
-/config/git
+
+# sesitive configs
+/config/git/config
+
+# gui configs
+/config/karabiner
+/config/raycast
+
+# scripts
 scripts/lib/mo.sh
+
+# generate env file
+.env

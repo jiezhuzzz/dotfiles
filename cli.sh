@@ -12,9 +12,6 @@ SCRIPTS_DIR="$DOTFILES_DIR"/scripts
 SCRIPTS_LIB="$SCRIPTS_DIR"/lib
 
 ### load functions
-if [[ ! -f "$SCRIPTS_LIB"/mo.sh ]]; then
-    curl -sSL https://raw.githubusercontent.com/tests-always-included/mo/master/mo -o "$SCRIPTS_LIB"/mo.sh
-fi
 for script in "$SCRIPTS_LIB"/*.sh; do
     source "$script"
 done
