@@ -20,8 +20,8 @@ function set_git() {
         confirm=$(yes_or_no 'Confirm to set up git?' Y)
         # if confirmed, set up git
         if [[ $confirm == Y ]]; then
-            git config --global user.name "$username"
-            git config --global user.email "$email"
+            echo "export GIT_USER=$username" >> "$DOTFILES_DIR"/.env
+            echo "export GIT_EMAIL=$email" >> "$DOTFILES_DIR"/.env
             break
         else
             warn "Please try again."
