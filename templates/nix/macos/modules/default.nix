@@ -6,6 +6,12 @@
   ...
 }: {
   users.users.${user.name}.home = user.home;
+  nix.settings.trusted-users = [
+    "root"
+    "@admin"
+    user.name
+  ];
+  security.pam.enableSudoTouchIdAuth = true;
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

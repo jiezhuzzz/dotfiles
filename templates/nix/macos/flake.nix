@@ -41,13 +41,13 @@
     ...
   }: let
     user = {
-      name = "{{USER}}";
-      home = "{{HOME}}";
-      gitName = "{{GIT_NAME}}";
-      gitEmail = "{{GIT_EMAIL}}";
+      name = "$USER";
+      home = "$HOME";
+      gitName = "$GIT_NAME";
+      gitEmail = "$GIT_EMAIL$";
     };
   in {
-    darwinConfigurations."MacBook" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."Mac" = nix-darwin.lib.darwinSystem {
       specialArgs = {inherit inputs user;};
       modules = [
         nix-homebrew.darwinModules.nix-homebrew

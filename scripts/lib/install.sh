@@ -45,8 +45,8 @@ function install_nix_flakes() {
     for file in $nix_files; do
         relative_path=$(relative_path "$nix_template_dir" "$file")
         local output_file="$nix_dir"/"$relative_path"
-        prepare_dir "$(dirname "$output_file")"
-        mo "$file" > "$output_file"
+        prepare_dir "$(dirname "$output_file")" 
+        nix run nixpkgs#mustache "$file" "$output_file"
     done
 }
 

@@ -4,7 +4,8 @@
   home.packages = with pkgs; [
     ripgrep
     fd
-    curl
-    less
+    aerospace
+    zellij
+    oh-my-posh
   ];
 }

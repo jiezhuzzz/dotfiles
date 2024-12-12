@@ -26,7 +26,7 @@
 # define x axis padding (default is 0)
 #
 # Example:
-# padding-x = 10
+padding-x = 10
 
 # Padding-y
 #
@@ -60,7 +60,7 @@
 # This configuration only has effect if use-fork is disabled.
 #
 # Example:
-# working-dir = "/Users/raphael/Documents/"
+# working-dir = "$HOME/Repos"
 
 # Environment variables
 #
@@ -181,8 +181,9 @@
 # will always look for regular font bounds whene
 #
 # You can also set family on root to overwrite all fonts
-# [fonts]
-#   family = "cascadiamono"
+[fonts]
+family = "JetBrainsMono Nerd Font"
+size = 16
 #
 # You can also specify extra fonts to load
 # [fonts]
@@ -191,33 +192,7 @@
 # In case you want to specify any font feature:
 # [fonts]
 # features = ["ss02", "ss03", "ss05", "ss19"]
-#
-# Note: Font features do not have support to live reload on configuration,
-# so to reflect your changes, you will need to close and reopen Rio.
-#
-# Example:
-# [fonts]
-# size = 18
-#
-# [fonts.regular]
-# family = "cascadiamono"
-# style = "normal"
-# weight = 400
-#
-# [fonts.bold]
-# family = "cascadiamono"
-# style = "normal"
-# weight = 800
-#
-# [fonts.italic]
-# family = "cascadiamono"
-# style = "italic"
-# weight = 400
-#
-# [fonts.bold-italic]
-# family = "cascadiamono"
-# style = "italic"
-# weight = 800
+
 
 # Scroll
 #
@@ -321,12 +296,5 @@
 #   { key = "home", with = "super | shift", bytes = [27, 91, 53, 126] }
 # ]
 
-# Log level
-#
-# This property enables log level filter and file. The default level is "OFF" and the logs are not logged to a file as default.
-#
-# Example:
-# [developer]
-# log-level = "OFF"
-# enable-log-file = false
+confirm-before-quit = false
 
