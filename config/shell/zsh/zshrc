@@ -8,10 +8,19 @@ export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh"
 
 
 ### zsh options
-
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 ### commands & aliases
 setopt AUTO_CD
 
-eval_if_cmd atuin "init zsh"
-eval_if_cmd starship "init zsh"
+if has_cmd direnv; then
+    eval "$(direnv hook zsh)"
+fi
+
+if has_cmd atuin; then
+    eval "$(atuin init zsh)"
+fi
+
+if has_cmd oh-my-posh; then
+    eval "$(oh-my-posh init zsh)"
+fi

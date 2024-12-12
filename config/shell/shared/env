@@ -14,10 +14,10 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export RYE_HOME="$XDG_DATA_HOME"/rye
-export SONARLINT_USER_HOME="$XDG_DATA_HOME/sonarlint"
+export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
 export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 function yy() {
   local tmp
@@ -44,5 +44,5 @@ function eval_if_cmd() {
 }
 
 function has_cmd() {
-  [[ $(command -v "$1" &>/dev/null) ]]
+  command -v "$1" &>/dev/null
 }
