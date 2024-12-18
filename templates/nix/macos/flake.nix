@@ -43,8 +43,8 @@
     user = {
       name = "$USER";
       home = "$HOME";
-      gitName = "$GIT_NAME";
-      gitEmail = "$GIT_EMAIL$";
+      gitName = "$GIT_USER";
+      gitEmail = "$GIT_EMAIL";
     };
   in {
     darwinConfigurations."Mac" = nix-darwin.lib.darwinSystem {

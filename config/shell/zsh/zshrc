@@ -4,11 +4,15 @@ export -UT INFOPATH infopath
 
 source "$XDG_CONFIG_HOME"/shell/shared/env
 
+# add zsh completion
+eval "$(uv generate-shell-completion zsh)"
+fpath+="$XDG_CONFIG_HOME"/zsh/completions
+
 export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh"
 
 
 ### zsh options
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+autoload -U compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 ### commands & aliases
 setopt AUTO_CD
@@ -23,4 +27,8 @@ fi
 
 if has_cmd oh-my-posh; then
     eval "$(oh-my-posh init zsh)"
+fi
+
+if has_cmd sheldon; then
+    eval "$(sheldon init --shell zsh)"
 fi

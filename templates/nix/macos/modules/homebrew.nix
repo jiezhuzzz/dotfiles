@@ -37,7 +37,9 @@
       "homerow"
       "1password"
       "karabiner-elements"
-      "rio" 
+      "bartender"
+      "mactex-no-gui"
+      "iterm2"
     ];
     masApps = {
       "WeChat" = 836500024;
@@ -49,6 +51,11 @@
       "PDF Viewer" = 1120099014;
       "Endel" = 1346247457;
       "Bear" = 1091189122;
+      "Obsidian Web Clipper" = 6720708363;
+      "AdGuard for Safari" = 1440147259;
+      "1Password for Safari" = 1569813296;
+      "Momentum" = 1564329434;
+      "Raycast Companion" = 6738274497;
     };
     onActivation = {
       autoUpdate = true;

@@ -1,14 +1,11 @@
-/nix
-
 # sesitive configs
 /config/git/config
 
 # gui configs
 /config/karabiner
 /config/raycast
-
-# scripts
-scripts/lib/mo.sh
+/config/iterm2
 
 # generate env file
 .env
+.envrc

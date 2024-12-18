@@ -19,7 +19,7 @@ export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
-function yy() {
+function y() {
   local tmp
   tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"

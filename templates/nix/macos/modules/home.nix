@@ -7,5 +7,9 @@
     aerospace
     zellij
     oh-my-posh
+    atuin
+    sheldon
+    zoxide
+    yazi
   ];
 }
