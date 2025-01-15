@@ -6,14 +6,6 @@ set -u
 set -o pipefail
 (shopt -p inherit_errexit &>/dev/null) && shopt -s inherit_errexit
 
-function install_xcode_command_line_tools() {
-    if ! xcode-select -p &>/dev/null; then
-        info "Installing Xcode command line tools ..."
-        xcode-select --install
-    fi
-    status "Xcode command line tools are already installed."
-}
-
 function install_rio_terminfo() {
     if ! infocmp rio &>/dev/null; then
         info "Installing rio terminfo..."
@@ -35,7 +27,7 @@ function install_nix() {
 }
 
 function install_nix_flakes() {
-    local nix_dir="$DOTFILES_DIR"/nix
+    local nix_dir="$HOME/Nix"
     local nix_template_dir="$DOTFILES_DIR"/templates/nix/"$(os)"
     local nix_files
 
@@ -46,7 +38,7 @@ function install_nix_flakes() {
         relative_path=$(relative_path "$nix_template_dir" "$file")
         local output_file="$nix_dir"/"$relative_path"
         prepare_dir "$(dirname "$output_file")" 
-        nix run nixpkgs#mustache "$file" "$output_file"
+        envsubst < "$file" > "$output_file"
     done
 }
 
@@ -66,9 +58,7 @@ function install_blesh() {
 function install_pkgs() {
     if has_cmd "nix"; then
         info "Installing packages with Nix..."
-        nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-        nix-channel --update
-        # TODO: install packages
+        install_nix_flakes
     else
         info "Nix is not installed. Installing packages without sudo..."
         _install_pkgs_nosudo
@@ -81,18 +71,12 @@ function install_pkgs() {
 function _install_nix_mac() {
     info "Installing Nix on MacOS..."
     # install nix
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
-    # install nix-darwin
-    nix run nix-darwin -- switch --flake ~/.config/nix-darwin
-    darwin-rebuild switch --flake ~/.config/nix-darwin
-    # install nix-home-manager
-    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-    nix-channel --update
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 }
 
 function _install_nix_linux() {
     info "Installing Nix on Linux..."
-    sh <(curl -L https://nixos.org/nix/install) --daemon #TODO: no confirm
+    sh <(curl -L https://nixos.org/nix/install) --daemon
 }
 
 function _install_pkgs_nosudo() {

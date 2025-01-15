@@ -1,11 +1,12 @@
 # Enable ble.sh
-[[ $- == *i* ]] && source "$XDG_DATA_HOME"/blesh/ble.sh --noattach --rcfile "$XDG_CONFIG_HOME"/blerc
+#[[ $- == *i* ]] && source "$XDG_DATA_HOME"/blesh/ble.sh --noattach --rcfile "$XDG_CONFIG_HOME"/blerc
 
 source "$XDG_CONFIG_HOME"/shell/shared/env
 
 export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/bash"
+export PATH="$HOME/.local/bin:$PATH"
 
-eval_if_cmd atuin "init bash"
-eval_if_cmd starship "init bash"
+eval "$(atuin init bash)"
+eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/pure.omp.json)"
 
-[[ ${BLE_VERSION-} ]] && ble-attach
+#[[ ${BLE_VERSION-} ]] && ble-attach

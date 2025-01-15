@@ -14,8 +14,17 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.nix]
+[plugins.nix-zsh-completions]
 github = "nix-community/nix-zsh-completions"
 
-[plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
+# [plugins.zsh-vi-mode]
+# github = "jeffreytse/zsh-vi-mode"
+
+# [plugins.zsh-fast-syntax-highlighting]
+# github = "zdharma-continuum/fast-syntax-highlighting"

@@ -1,0 +1,25 @@
+
+### theme
+theme = nord
+
+### font
+font-size = 16
+
+### cursor
+# cursor-style = block
+# cursor-style-blink = false
+# shell-integration-features = no-cursor
+
+### copy
+copy-on-select = true
+
+### titlebar
+title = " "
+macos-titlebar-proxy-icon = hidden
+
+### shaders
+# custom-shader = shaders/cubes.glsl
+custom-shader = shaders/inside-the-matrix.glsl
+
+### padding
+window-padding-x = 10

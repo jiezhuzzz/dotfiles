@@ -1,34 +1,31 @@
+# if [ "$TERM_PROGRAM" != "vscode" ]; then
+#     eval "$(zellij setup --generate-auto-start zsh)"
+# fi
+
 ### setup environment variables
 export -U PATH path FPATH fpath MANPATH manpath
 export -UT INFOPATH infopath
 
-source "$XDG_CONFIG_HOME"/shell/shared/env
-
-# add zsh completion
-eval "$(uv generate-shell-completion zsh)"
-fpath+="$XDG_CONFIG_HOME"/zsh/completions
-
 export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh"
 
+source "$XDG_CONFIG_HOME"/shell/shared/env
+source "$XDG_CONFIG_HOME"/shell/shared/alias
 
-### zsh options
-autoload -U compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+
+# # add zsh completion
+# eval "$(uv generate-shell-completion zsh)"
+# fpath+="$XDG_CONFIG_HOME"/zsh/completions
 
 ### commands & aliases
 setopt AUTO_CD
+autoload -U compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
-if has_cmd direnv; then
-    eval "$(direnv hook zsh)"
-fi
+# # 1password
+export LS_COLORS="$(vivid generate nord)"
 
-if has_cmd atuin; then
-    eval "$(atuin init zsh)"
-fi
 
-if has_cmd oh-my-posh; then
-    eval "$(oh-my-posh init zsh)"
-fi
-
-if has_cmd sheldon; then
-    eval "$(sheldon init --shell zsh)"
-fi
+eval "$(oh-my-posh init zsh)"
+eval "$(sheldon source)"
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(direnv hook zsh)"
+eval "$(atuin init zsh)"

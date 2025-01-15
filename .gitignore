@@ -5,6 +5,7 @@
 /config/karabiner
 /config/raycast
 /config/iterm2
+/config/op
 
 # generate env file
 .env

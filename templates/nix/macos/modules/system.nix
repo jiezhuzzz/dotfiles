@@ -16,13 +16,15 @@
       procs
       fd
       direnv
+      fastfetch
 
       # dev tools
+      git
       rustup
       cmake
-      python3
       uv
       colima
+      devenv
     ];
     shellAliases = {
       ll = "ls -l";
@@ -30,11 +32,20 @@
     };
   };
 
-  fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
-    pkgs.nerd-fonts.fira-code
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.hack
   ];
-
+  programs = {
+    direnv = {
+      enable = true; # enable nix-direnv for faster experience
+      silent = true; # hide the message when direnv is enabled
+    };
+  };
+  services = {
+    sketchybar.enable = false;
+  };
   system = {
     stateVersion = 5;
     defaults = {
@@ -75,7 +86,7 @@
         ShowDate = 0;
         ShowDayOfWeek = false;
       };
-      spaces.spans-displays = true;
+      spaces.spans-displays = false;
       trackpad.Clicking = true;
     };
   };

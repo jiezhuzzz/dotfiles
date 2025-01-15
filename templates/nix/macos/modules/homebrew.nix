@@ -18,6 +18,7 @@
 
   homebrew = {
     enable = true;
+    taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
       "obsidian"
       "arc"
@@ -39,7 +40,8 @@
       "karabiner-elements"
       "bartender"
       "mactex-no-gui"
-      "iterm2"
+      "rio"
+      "ghostty"
     ];
     masApps = {
       "WeChat" = 836500024;
@@ -56,6 +58,7 @@
       "1Password for Safari" = 1569813296;
       "Momentum" = 1564329434;
       "Raycast Companion" = 6738274497;
+      "SnippetsLab" = 1006087419;
     };
     onActivation = {
       autoUpdate = true;

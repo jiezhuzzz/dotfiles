@@ -11,5 +11,13 @@
     sheldon
     zoxide
     yazi
+    gitui
+    delta
+    pssh
+    vivid
+    eza
+    _1password-cli
+    alejandra
+    graphviz
   ];
 }
