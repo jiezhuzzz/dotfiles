@@ -1,4 +1,0 @@
-[whitelist]
-prefix = ["~/Repos"]
-
-hide_env_diff = true
